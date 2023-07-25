@@ -60,7 +60,9 @@ def harmonize_audio():
 
     ratio = interval_ratios[interval]
 
-    harmonized_audio = pyrb.time_stretch(audio_arr, audio.frame_rate, ratio)
+    cents = 1200 * np.log2(ratio)
+ 
+    harmonized_audio = pyrb.pitch_shift(audio_arr, audio.frame_rate, cents)
 
     sf.write("harmonized.wav", harmonized_audio, audio.frame_rate)
 
